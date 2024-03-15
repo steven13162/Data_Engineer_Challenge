@@ -4,13 +4,16 @@ import numpy as np
 
 def q3_memory(file_path: str) -> List[Tuple[str, int]]:
 
-    #Parametros iniciales
+    #Parametros Iniciales
     dynamic_key = 'username'
-    chunksize = 10000
-
+    chunksize = 4000
+    columnas_lectura = ['user','mentionedUsers']
     chunks = []
 
+    #Lectura de JSON por bloques
     for chunk in pd.read_json(file_path, lines=True, chunksize=chunksize):
+        #Filtrato de info necesaria
+        chunk=chunk[columnas_lectura]  
         chunk[dynamic_key + '_'] = chunk['user'].apply(lambda x: x.get(dynamic_key))
         chunk['conteo_menciones'] = chunk['mentionedUsers'].str.len()
         chunk['conteo_menciones'] = np.where(np.isnan(chunk['conteo_menciones']), 0, chunk['conteo_menciones'])
