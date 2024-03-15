@@ -30,9 +30,8 @@ def q2_time(file_path: str) -> List[Tuple[str, int]]:
     lista_emojis = [emoji for sublist in df['emojis'] for emoji in sublist]
 
     #Conteo de emojis para generar salida
-    conteo_emojis = pd.Series(lista_emojis).value_counts('N# Usos').reset_index()
+    conteo_emojis = pd.Series(lista_emojis).value_counts().reset_index()
     conteo_emojis.columns = ['Emoji', 'N# Usos']
     conteo_emojis = conteo_emojis.sort_values(by='N# Usos', ascending=False)
     salida_emojis = conteo_emojis.head(10)
     return salida_emojis.values
-
