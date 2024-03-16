@@ -1,0 +1,4 @@
+memory-profiler==0.61.0
+numpy==1.26.4
+pandas==2.1.4
+emoji==2.10.1
